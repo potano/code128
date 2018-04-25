@@ -1,0 +1,42 @@
+body {margin: 10px 1em}
+
+div#barcode_input {
+   display: inline-block;
+   width: 25em;
+   margin: 2ex 1em 0 3em;
+   padding: 10px;
+   border: 1px solid blue;
+}
+
+div#resultbox {
+   display: none;
+   margin: 6ex 10em;
+   padding: 10px;
+   border: 1px solid black;
+}
+
+div#outarea {
+   margin-bottom: 1ex;
+   text-align: center;
+}
+
+span#usedcode {
+   font-size: 90%;
+   font-family: monospace;
+}
+
+span#errorpoint {
+   padding-right: 2em;
+   color: red;
+   font-size: 90%;
+   font-family: monospace;
+}
+
+span#errormsg {
+   color: red;
+}
+
+button#gbutton {
+   margin: 0 5em;
+}
+

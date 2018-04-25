@@ -26,7 +26,10 @@ function code128(code, barcodeType) {
     if (barcodeType=='C' && code.length%2==1)
         code = '0'+code;
     var a = parseBarcode128(code,  barcodeType);
-    return bar2html128(a.join('')) ;//+ '<label>' + code + '</label>';
+    if (a instanceof Array) {
+       return a;
+    }
+    return bar2html128(a) ;//+ '<label>' + code + '</label>';
 }
  
  
@@ -49,13 +52,14 @@ function parseBarcode128(barcode, barcodeType) {
     {
         var code = barcodeType=='C' ? +barcode.substr(i++, 2) : barcode.charCodeAt(i);
         converted = fromType128[barcodeType](code);
-        if (isNaN(converted) || converted<0 || converted>106)
-            throw new Error(format("Unrecognized character (%1) at position %2 in code '%3'.", code, i, barcode));
+        if (isNaN(converted) || converted<0 || converted>106) {
+           return [code, i, barcode];
+        }
         bars.add( converted );
     }
     bars.push(BARS[bars.check % 103], BARS[STOP]);
  
-    return bars;
+    return bars.join('');
 }
  
 function format(c){

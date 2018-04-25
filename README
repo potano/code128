@@ -1,1 +1,14 @@
-Files taken from https://itlearnings.wordpress.com/2011/01/08/javascript-code128-barcode/
+Generates Code 128 barcodes in the browser using Javascript and CSS.
+Works with recent browsers.  Has no dependencies on outside libraries.
+
+The files in this collection are based on three files extracted from the web page
+https://itlearnings.wordpress.com/2011/01/08/javascript-code128-barcode/
+
+The author of that page indicates that the files he posted were indeed files that he
+modified from another source, denoted only as "Code128".  This is all I can gather
+about the provenance of these files.
+
+The maintainer of itlearnings.wordpress.com does not identify himself except via a
+link to his LinkedIn page.  This Jim Lawhorn had nothing to say about the licensing
+of the files he posted on the page of interest.
+

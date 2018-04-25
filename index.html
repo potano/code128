@@ -1,18 +1,67 @@
 <html>
-<head>
-<link rel="StyleSheet" href="barcode.css" type="text/css" />
-<script src="barcode.js"></script>
-<script type="text/javascript">
-function encode()
-{
-  var strValue = document.getElementById("barcode_input").value;
-  var strBarcodeHTML = code128(strValue);
-  document.getElementById("barcode").innerHTML = strBarcodeHTML;
-}
-</script>
-</head>
-<div class="barcode128v" id="barcode"></div>
-<br /><br />
-<input style="margin-left:45px" type="text" id="barcode_input"></input>
-<input type="button" value="Encode" onclick="encode()"/>
+   <head>
+      <title>Code 128 barcode generator</title>
+      <link rel="stylesheet" href="barcode.css" type="text/css"/>
+      <link rel="stylesheet" href="layout.css" type="text/css"/>
+      <script src="barcode.js"></script>
+    </head>
+    <body>
+       <h1>Code 128 barcode generator</h1>
+       <div contenteditable="true" id="barcode_input"></div>
+       <button id="gbutton">Generate</button>
+       <br/>
+       <div id="resultbox">
+          <div id="outarea">
+             <span id="usedcode"></span>
+             <div id="errorblock">
+                <span id="errorpoint">^</span>
+                <br/>
+                <span id="errormsg"></span>
+             </div>
+          </div>
+          <div class="barcode128h" id="barcode"></div>
+       </div>
+       <script>//<![CDATA[
+(function () {
+   var barcode_input = document.getElementById('barcode_input');
+   var gbutton = document.getElementById('gbutton');
+   var resultbox = document.getElementById('resultbox');
+   var outarea = document.getElementById('outarea');
+   var usedcode = document.getElementById('usedcode');
+   var errorblock = document.getElementById('errorblock');
+   var errorpoint = document.getElementById('errorpoint');
+   var errormsg = document.getElementById('errormsg');
+   var barcode_output = document.getElementById('barcode');
+   barcode_input.focus();
+   gbutton.onclick = updateBarcode;
+
+   function updateBarcode(evt) {
+      resultbox.style.display = 'inline-block';
+      var str = barcode_input.innerText;
+      var pos = -1;
+      var html = code128(str);
+      if (html instanceof Array) {
+         outarea.style.textAlign = 'left';
+         errorblock.style.display = 'block';
+         barcode_output.style.display = 'none';
+         errormsg.innerText = "Illegal character";
+         pos = html[1];
+         if (pos < 0) {
+            pos = 0;
+         }
+         usedcode.innerText = str.substr(0, pos);
+         var wid = usedcode.offsetWidth;
+         errorpoint.style.paddingLeft = wid + 'px';
+      }
+      else {
+         outarea.style.textAlign = 'center';
+         errorblock.style.display = 'none';
+         barcode_output.style.display = 'block';
+         barcode_output.innerHTML = html;
+      }
+      usedcode.innerText = str;
+   }
+})();
+       //]]></script>
+    </body>
 </html>
