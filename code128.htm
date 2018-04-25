@@ -1,0 +1,18 @@
+<html>
+<head>
+<link rel="StyleSheet" href="barcode.css" type="text/css" />
+<script src="barcode.js"></script>
+<script type="text/javascript">
+function encode()
+{
+  var strValue = document.getElementById("barcode_input").value;
+  var strBarcodeHTML = code128(strValue);
+  document.getElementById("barcode").innerHTML = strBarcodeHTML;
+}
+</script>
+</head>
+<div class="barcode128v" id="barcode"></div>
+<br /><br />
+<input style="margin-left:45px" type="text" id="barcode_input"></input>
+<input type="button" value="Encode" onclick="encode()"/>
+</html>
